@@ -1,110 +1,117 @@
-Ejecutar el script PAC_Desarrollo_2s2223_UF3_Configuracion_Inicial.sql
+Ejecutar el script PAC_Desarrollo_2s2223_UF3_Configuracion_Inicial.sql:
+
 - Ejecuta el código que continente la creación de 2 tablas
 - Revisa que las dos tablas estan creadas correctamente
 - Revisa el contenido que se ha insertado en las tablas
   
  La definición de las tablas es la siguiente:
+ 
 **ASIGNATURAS**
-• COD_ASIG – Código único de cada asignatura (PK)
-• ABV_ASIG – Abreviatura del nombre de la asignatura
-• DES_ASIG – Descripción de la asignatura
-• SEMES – Número de semestre en el que se debiera cursar la asignatura
-• HORAS – Número de horas que tiene la asignatura
-• PONDERA_ASIG – Ponderación que tiene la Asignatura en el ciclo según sus horas
-• PRECIO – Precio de la asignatura
-• NUM_UFS – Número de Unidades Formativas de la asignatura
+- COD_ASIG – Código único de cada asignatura (PK)
+- ABV_ASIG – Abreviatura del nombre de la asignatura
+- DES_ASIG – Descripción de la asignatura
+- SEMES – Número de semestre en el que se debiera cursar la asignatura
+- HORAS – Número de horas que tiene la asignatura
+- PONDERA_ASIG – Ponderación que tiene la Asignatura en el ciclo según sus horas
+- PRECIO – Precio de la asignatura
+- NUM_UFS – Número de Unidades Formativas de la asignatura
+  
 **UFS**
-• COD_ASIG – Código único de cada asignatura (PK)
-• COD_UF – Código de cada UF (PK)
-• DES_UF – Descripción de la UF
-• NUM_HORAS – Número de horas de la UF
-• PONDERA_UF – Ponderación que tiene la UF en la asignatura según sus horas
-• TOT_PACS_UF – Total de PACs que tiene la UF
-• MIN_PACS_ENT – Mínimo de PACs a entregar para hacer Examen de Ordinaria
-• NUM_PACS_ENT – Número de PACs que ha entregado el alumno de esa UF
-• NOTA_MEDIA_PACS – Nota media de las PACs entregadas de la UF
-• NOTA_EXAM – Nota del examen de la UF
-• CONV_EXAM – Convocatoria (ORDINARIA O EXTRAORDINARIA O PROYECTO)
+- COD_ASIG – Código único de cada asignatura (PK)
+- COD_UF – Código de cada UF (PK)
+- DES_UF – Descripción de la UF
+- NUM_HORAS – Número de horas de la UF
+- PONDERA_UF – Ponderación que tiene la UF en la asignatura según sus horas
+- TOT_PACS_UF – Total de PACs que tiene la UF
+- MIN_PACS_ENT – Mínimo de PACs a entregar para hacer Examen de Ordinaria
+- NUM_PACS_ENT – Número de PACs que ha entregado el alumno de esa UF
+- NOTA_MEDIA_PACS – Nota media de las PACs entregadas de la UF
+- NOTA_EXAM – Nota del examen de la UF
+- CONV_EXAM – Convocatoria (ORDINARIA O EXTRAORDINARIA O PROYECTO)
 
 # EJERCICIOS
 
 ## EJERCICIO 1) REPASO SQL (TABLAS Y VISTAS)
 
 **1.1.Añadir campos a las tablas ASIGNATURAS y UFS**
-• Tabla ASIGNATURAS
-o Campo NOM_PROFE tipo VARCHAR(50)
-o Campo APRO_UFS tipo INT
-o Campo NOTA_MEDIA_ASIG tipo NUMBER(4,2)
-• Tabla UFS
-o Campo NOTA_MEDIA_UF tipo NUMBER(4,2)
-o Campo NOTA_FINAL_UF tipo INT
-o Campo STAT_UF tipo VARCHAR(10)
+
+ **Tabla ASIGNATURAS**
+- Campo NOM_PROFE tipo VARCHAR(50)
+- Campo APRO_UFS tipo INT
+- Campo NOTA_MEDIA_ASIG tipo NUMBER(4,2)
+  
+ **Tabla UFS**
+- Campo NOTA_MEDIA_UF tipo NUMBER(4,2)
+- Campo NOTA_FINAL_UF tipo INT
+- Campo STAT_UF tipo VARCHAR(10)
 
 **1.2.Crear una VISTA llamada “EXPEDIENTE”.**
 Ha de ser INNER JOIN de las tablas ASIGNATURAS y UFS. Ha de contener los siguientes campos de cada tabla:
-• Tabla ASIGNATURAS
-o ABV_ASIG
-o DES_ASIG
-• Tabla UFS
-o PORC_PACS_ENTRE
-▪ Campo calculado que será % de PACs Entregadas según el total de PACs de la UF
-• ROUND(num_pacs_ent / tot_pacs_uf * 100,2) AS PORC_PACS_ENTRE
-o NOTA_MEDIA_PACS
-o NOTA_EXAM
-o CONV_EXAM
-o NOTA_MEDIA_UF
-o NOTA_FINAL_UF
-o STAT_UF
+**Tabla ASIGNATURAS**
+- ABV_ASIG
+- DES_ASIG
+**Tabla UFS**
+- PORC_PACS_ENTRE
+  *Campo calculado que será % de PACs Entregadas según el total de PACs de la UF*
+- ROUND(num_pacs_ent / tot_pacs_uf * 100,2) AS PORC_PACS_ENTRE
+- NOTA_MEDIA_PACS
+- NOTA_EXAM
+- CONV_EXAM
+- NOTA_MEDIA_UF
+- NOTA_FINAL_UF
+- STAT_UF
 
 **1.3.Actualizar registros de la tabla ASIGNATURAS.**
-• Tabla ASIGNATURAS
-o Actualizar el campo NOM_PROFE de los registros de las asignaturas de bases de datos
-▪ COD_ASIG = ICB0102A y COD_ASIG = ICB0102B:
-▪ Nombre del profesor = Emilio Saurina
+
+**Tabla ASIGNATURAS**
+Actualizar el campo NOM_PROFE de los registros de las asignaturas de bases de datos:
+- COD_ASIG = ICB0102A y COD_ASIG = ICB0102B:
+- Nombre del profesor = Emilio Saurina
 
 ## EJERCICIO 2) PROCEDIMIENTO
 **Crear un procedimiento llamado “P_NOTA_MEDIA_ASIG”**
-• Crear un procedimiento que a partir de un código asignatura pasado por parámetro nos devuelva el
+Crear un procedimiento que a partir de un código asignatura pasado por parámetro nos devuelva el
 número de UFS aprobadas y la nota media de la asignatura si estan todas aprobadas
-o Variables de entrada
-▪ VIN_COD_ASIG
-o Variables de salida
-▪ VOUT_APRO_UFS
-▪ VOUT_NOTA_MEDIA_ASIG
+**Variables de entrada**
+- VIN_COD_ASIG
+**Variables de salida**
+- VOUT_APRO_UFS
+- VOUT_NOTA_MEDIA_ASIG
 
-• Para los cálculos se ha de tener en cuenta lo siguiente:
-o Si una UF está aprobada (NOTA_FINAL_UF >= 5)
-▪ Se calcula la parte de nota de uf NOTA_FINAL_UF * PONDERA_UF
-o Se van sumando las notas ponderadas de cada UF
-o Durante el proceso se han de contar las UFS aprobadas y las NO aprobadas
-▪ Se va a devolver el número de UFS aprobadas
-o Si hay una o mas UFs NO aprobadas no se puede establecer nota media
-▪ El resultado final de NOTA_MEDIA_ASIG = NULL
-o Si todas las UFS estan aprobadas
-▪ El resultado final es el resultado calculado
+Para los cálculos se ha de tener en cuenta lo siguiente:
+- Si una UF está aprobada (NOTA_FINAL_UF >= 5):
+Se calcula la parte de nota de uf NOTA_FINAL_UF * PONDERA_UF
+Se van sumando las notas ponderadas de cada UF
+
+Durante el proceso se han de contar las UFS aprobadas y las NO aprobadas
+Se va a devolver el número de UFS aprobadas
+- Si hay una o mas UFs NO aprobadas no se puede establecer nota media
+El resultado final de NOTA_MEDIA_ASIG = NULL
+- Si todas las UFS estan aprobadas
+El resultado final es el resultado calculado
 
 ## EJERCICIO 3) FUNCION
 **Crea una función llamada “F_NOTA_MEDIA_UF”**
-• Crear una función devuelva la nota media de una UF a partir de los datos siguientes:
-o Variables de entrada
-▪ VIN_CONV_EXAM
-▪ VIN_NUM_PACS_ENT
-▪ VIN_MIN_PACS_ENT
-▪ VIN_NOTA_MEDIA_PACS
-▪ VIN_NOTA_EXAM
+Crear una función devuelva la nota media de una UF a partir de los datos siguientes:
+Variables de entrada:
+- VIN_CONV_EXAM
+- VIN_NUM_PACS_ENT
+- VIN_MIN_PACS_ENT
+- VIN_NOTA_MEDIA_PAC
+- VIN_NOTA_EXAM
 
-• Para los cálculos se ha de tener en cuenta lo siguiente:
-o Si la convocatoria es igual a “EXTRAORDINARIA”
-▪ La nota media es igual a la nota de examen
-o Si la convocatoria es “ORDINARIA” tenemos los siguientes casos:
-▪ La nota media es igual a la nota media de pacs por 0,4 en estos casos
-• Si el número de pacs entregadas es menor que mínimo de pacs a entregar
-• Si la nota de examen es menor a 4,75
-• Si la nota media de PACs es menor a 7 y la nota examen entre 4,75 y 4,89 a
-▪ Cuando no se dan ninguno de los demás casos la nota se calcula como
-• Nota media es igual a nota media de pacs por 0,4 mas nota examen por 0,6
-o Si la convocatoria es “PROYECTO” es un caso peculiar ya que el proyecto no tiene PACS
-▪ La nota media es igual a la nota de examen que es donde se pondrá la nota que tiene
+Para los cálculos se ha de tener en cuenta lo siguiente:
+- Si la convocatoria es igual a “EXTRAORDINARIA”:
+La nota media es igual a la nota de examen
+- Si la convocatoria es “ORDINARIA” tenemos los siguientes casos:
+  La nota media es igual a la nota media de pacs por 0,4 en estos casos
+  Si el número de pacs entregadas es menor que mínimo de pacs a entregar
+  Si la nota de examen es menor a 4,75
+  Si la nota media de PACs es menor a 7 y la nota examen entre 4,75 y 4,89 a
+  Cuando no se dan ninguno de los demás casos la nota se calcula como
+  Nota media es igual a nota media de pacs por 0,4 mas nota examen por 0,6
+- Si la convocatoria es “PROYECTO” es un caso peculiar ya que el proyecto no tiene PACS
+  La nota media es igual a la nota de examen que es donde se pondrá la nota que tiene
 el proyecto
 
 ## EJERCICIO 4) TRIGGER
